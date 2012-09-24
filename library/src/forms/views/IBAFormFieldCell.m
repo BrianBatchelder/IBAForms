@@ -45,6 +45,7 @@
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+        formFieldStyle_ = style;
 
 		self.cellView = [[[UIView alloc] initWithFrame:self.contentView.bounds] autorelease];
 		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -80,6 +81,13 @@
 	if (style != formFieldStyle_) {
 		IBAFormFieldStyle *oldStyle = formFieldStyle_;
 		formFieldStyle_ = [style retain];
+        
+        // don't allow changes to frame at this point.
+        assert(oldStyle.labelFrame.size.width == formFieldStyle_.labelFrame.size.width);
+        
+        formFieldStyle_.labelFrame = oldStyle.labelFrame;
+        formFieldStyle_.valueFrame = oldStyle.valueFrame;
+        
 		IBA_RELEASE_SAFELY(oldStyle);
 		
 		self.styleApplied = NO;
