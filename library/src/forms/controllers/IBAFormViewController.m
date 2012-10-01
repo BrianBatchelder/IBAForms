@@ -190,6 +190,9 @@
 		// Start editing the form field
 		[[IBAInputManager sharedIBAInputManager] setActiveInputRequestor:(id<IBAInputRequestor>)formField];
 	} else {
+        if ([[IBAInputManager sharedIBAInputManager] activeInputRequestor]) {
+            [[[IBAInputManager sharedIBAInputManager] activeInputRequestor] deactivate];
+        }
 		[formField select];
 	}
 }
