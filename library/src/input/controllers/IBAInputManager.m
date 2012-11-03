@@ -121,10 +121,10 @@
 		}
 		
 		oldInputProvider.inputRequestor = nil;
-		[activeInputRequestor_ release];
 	}
 	
 	if (inputRequestor != nil)  {
+		[activeInputRequestor_ release];
 		activeInputRequestor_ = [inputRequestor retain];
 
 		id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
@@ -135,6 +135,7 @@
 	} else {
 		// The new input requestor is nil, so hide the input manager's view
 		[[activeInputRequestor_ responder] resignFirstResponder];
+		[activeInputRequestor_ release];
 		activeInputRequestor_ = nil;
 	}
 	
