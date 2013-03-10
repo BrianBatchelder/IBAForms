@@ -17,14 +17,11 @@
 #import "IBAInputNavigationToolbar.h"
 #import "IBAInputRequestorDataSource.h"
 
-@interface IBAFormViewController : UIViewController  <UITableViewDelegate, IBAInputRequestorDataSource> {
+@interface IBAFormViewController : UIViewController  <UITableViewDelegate, UIScrollViewDelegate, IBAInputRequestorDataSource> {
 	UITableView *tableView_;
 	CGRect tableViewOriginalFrame_;
 	IBAFormDataSource *formDataSource_;
 	CGRect keyboardFrame_;
-	
-	@private
-	UIView *hiddenCellCache_;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
